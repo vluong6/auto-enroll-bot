@@ -194,6 +194,8 @@ if __name__ == '__main__':
   cs161_enrolled = False
   cs145_enrolled = False  
 
+  amount = 0
+
   while(not cs161_enrolled or not cs145_enrolled):
     if(not cs161_enrolled):
       print('Checking for CS161...')
@@ -208,5 +210,12 @@ if __name__ == '__main__':
 
       if(len(courses_to_enroll) > 0):
         courses_to_enroll = [ ]
+
+    if(amount % 1440 == 0):
+      [twilio_sid, twilio_auth, twilio_phone, personal_phone] = get_information()
+      client = Client(twilio_sid, twilio_auth)
+      message = client.messages.create(body='It has been an hour with the program still running!', from_=twilio_phone, to=personal_phone)
+    else:
+      amount += 1
     
     time.sleep(2.5)
