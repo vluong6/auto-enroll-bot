@@ -2,7 +2,6 @@ import time
 import urllib2
 from twilio.rest import Client
 from bs4 import BeautifulSoup as bs
-import enroll
 
 cs161_url = "https://www.reg.uci.edu/perl/WebSoc?YearTerm=2019-14&CoCourse=34210"
 cs145_url = "https://www.reg.uci.edu/perl/WebSoc?YearTerm=2019-1&CoCourse=34160"
@@ -201,19 +200,13 @@ if __name__ == '__main__':
       cs161_enrolled = watchCS161(courses_to_enroll)
 
       if(len(courses_to_enroll) > 0):
-        successfully_enroll = enroll.register_for_courses(courses_to_enroll)
-        sendNotification(successfully_enroll)
         courses_to_enroll = [ ]
-        time.sleep(10)
 
     if(not cs145_enrolled):
       print('Checking for CS145...')
       cs145_enrolled = watchCS145(courses_to_enroll)
 
       if(len(courses_to_enroll) > 0):
-        successfully_enroll = enroll.register_for_courses(courses_to_enroll)
-        sendNotification(successfully_enroll)
         courses_to_enroll = [ ]
-        time.sleep(10)
     
     time.sleep(2.5)
