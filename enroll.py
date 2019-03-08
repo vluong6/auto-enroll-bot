@@ -61,3 +61,13 @@ def register_for_courses(courses):
   except:
     print('Errors have been thrown!')
     return [ ]
+
+if __name__ == '__main__':
+  courses = ["34220", "34221"]
+
+  [ucinetid, password] = get_information()
+  browser = login(ucinetid, password)
+  successful_enrollment = enroll(browser, courses)
+
+  if(len(successful_enrollment) > 0):
+    print('Sucessfully enrolled courses: ' + str(successful_enrollment))
